@@ -4,9 +4,9 @@ initialPosition = 0
 initialGrid = 16 *"0" + 2*"0"
 #2*2*2*2 grid + pointsA + pointsB
 def primitive(position):
-    if position[16:] == 16 * "1" and position[] > position[+1]:
+    if position[0:16] == 16 * "1" and position[] > position[+1]:
         return G.WIN
-    elif position[16:] == 16*"1":
+elif position[0:16] == 16*"1":
         return G.LOSE
     else:
         return G.UNDECIDED
