@@ -6,7 +6,7 @@ initialGrid = 16 *"0" + 2*"0"
 def primitive(position):
     if position[0:16] == 16 * "1" and position[16] > position[16+1]:
         return G.WIN
-elif position[0:16] == 16*"1":
+    elif position[0:16] == 16*"1":
         return G.LOSE
     else:
         return G.UNDECIDED
@@ -16,14 +16,14 @@ def generateMoves(position):
     for idx in xrange(4):
         if idx%2 != 1:
             if position[idx*4+idx+1]=="0":
-                ret.append((idx, idx+1)
-        if idx < 2:
+                ret.append((idx, idx+1))
+        if idx < 2 :
             if position[idx*4+idx+2]=="0":
                 ret.append((idx, idx+2))
     return ret
 
 def doMove(position, move):
-    position[move[0]*4+move[1]]] = "1"
+    position[move[0]*4+move[1]] = "1"
     if move[1] == move[0]+1:
         down1 = move[0] + 2
         down2 = move[1] + 2
@@ -42,7 +42,7 @@ def doMove(position, move):
         left1 = move[0] - 1
         left2 = move[1] - 1
         if position[left1 * 4 + move[0]] =="1" and position[left2 * 4 + move[1]] == "1" and position[left * 4 + up2] == "1":
-                           
+            position[16] += 1
     else:
         var = position[16]
         position[16] = position[16+1]
