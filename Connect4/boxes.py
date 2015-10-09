@@ -1,7 +1,7 @@
 import gamesman as G
 
 
-line = 2
+line = 3
 column = 2
 gameSize = line * column
 gridSize = gameSize ** 2
@@ -19,41 +19,39 @@ def edge(pos1, pos2):
     return pos1*gameSize + pos2
 
 def primitive(position):
-    #refatorar
-    flag = true
-    for idx in xrange(gridSize):
+    flag = True
+    for idx in xrange(gameSize):
         if idx%column != column-1:
             if position[edge(idx, idx+1)] == "0":
-                flag = false
+                flag = False
         if idx < (line-1)*column:
             if position[edge(idx, idx+column)] == "0":
-                flag = false
+                flag = False
                
-    #position[1] == "1" and position[2] == "1" and position[7] == "1" and position[11] == "1"
-    print flag
     if flag and position[pont1Pos] > position[pont2Pos]:
+        print position
         return G.WIN
     elif flag and position[pont1Pos] < position[pont2Pos]:
+        print position
         return G.LOSE
     elif flag:
         return G.TIE
-    else:
+    else: 
         return G.UNDECIDED
 
 def generateMoves(position):
     ret = []
-    for idx in xrange(gridSize):
+    for idx in xrange(gameSize):
         if idx%column != column-1:
             if position[edge(idx,idx+1)]=="0":
                 ret.append((idx, idx+1))
         if idx < (line-1)*column:
             if position[edge(idx, idx+column)]=="0":
                 ret.append((idx, idx+column))
-    print ret
     return ret
 
 def doMove(position, move):
-    position = position[0:edge(move[0], move[1])]+"1"+position[edge(move[0], move[1]+1]):]
+    position = position[0:edge(move[0], move[1])]+"1"+position[edge(move[0], move[1]+1):]
     if move[1] == move[0]+1:
         down1 = move[0] + column
         down2 = move[1] + column
@@ -71,7 +69,7 @@ def doMove(position, move):
             position = position[0:gridSize]+chr(ord(position[pont1Pos])+1)+position[pont2Pos:]
         left1 = move[0] - 1
         left2 = move[1] - 1
-        if position[edge(left1,move[0])] =="1" and position[edge(left2,move[1]) == "1" and position[edge(left1,left2)] == "1":
+        if position[edge(left1,move[0])] =="1" and position[edge(left2,move[1])] == "1" and position[edge(left1,left2)] == "1":
             position = position[0:gridSize]+chr(ord(position[pont1Pos])+1)+position[pont2Pos:]
     else:
         var = position[pont1Pos]
