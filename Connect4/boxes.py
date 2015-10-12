@@ -1,13 +1,13 @@
 import gamesman as G
 
 
-line = 3
-column = 2
+line = 2
+column = 3
 gameSize = line * column
 gridSize = gameSize ** 2
 
-pont1Pos = gameSize
-pont2Pos = gameSize+1
+pont1Pos = gridSize
+pont2Pos = gridSize+1
 
 initialPosition = gridSize *"0" + 2*"0"
 initialGrid = gridSize *"0" + 2*"0"
@@ -27,11 +27,12 @@ def primitive(position):
         if idx < (line-1)*column:
             if position[edge(idx, idx+column)] == "0":
                 flag = False
-               
-    if flag and position[pont1Pos] > position[pont2Pos]:
+    if(flag):
+        print position           
+    if flag and (position[pont1Pos] > position[pont2Pos]):
         print position
         return G.WIN
-    elif flag and position[pont1Pos] < position[pont2Pos]:
+    elif flag and (position[pont1Pos] < position[pont2Pos]):
         print position
         return G.LOSE
     elif flag:
@@ -51,11 +52,11 @@ def generateMoves(position):
     return ret
 
 def doMove(position, move):
-    position = position[0:edge(move[0], move[1])]+"1"+position[edge(move[0], move[1]+1):]
+    position = position[0:edge(move[0], move[1])]+"1"+position[edge(move[0], move[1])+1:]
     if move[1] == move[0]+1:
         down1 = move[0] + column
         down2 = move[1] + column
-        if position[edge(move[0],down1)] =="1" and position[edge(move[0],down2)] == "1" and position[edge(down1,down2)] == "1":
+        if position[edge(move[0],down1)] =="1" and position[edge(move[1],down2)] == "1" and position[edge(down1,down2)] == "1":
             position = position[0:gridSize]+chr(ord(position[pont1Pos])+1)+position[pont2Pos:]
         up1 = move[0] - column
         up2 = move[1] - column
