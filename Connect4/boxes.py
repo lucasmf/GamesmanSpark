@@ -1,7 +1,7 @@
 import gamesman as G
 
 
-line = 2
+line = 3
 column = 3
 gameSize = line * column
 gridSize = gameSize ** 2
@@ -27,13 +27,13 @@ def primitive(position):
         if idx < (line-1)*column:
             if position[edge(idx, idx+column)] == "0":
                 flag = False
-    if(flag):
-        print position           
+    #if(flag):
+        #print position           
     if flag and (position[pont1Pos] > position[pont2Pos]):
-        print position
+        #print position
         return G.WIN
     elif flag and (position[pont1Pos] < position[pont2Pos]):
-        print position
+        #print position
         return G.LOSE
     elif flag:
         return G.TIE
